@@ -55,7 +55,7 @@ public class PruebasController {
         model.addAttribute("productos", productos);
         model.addAttribute("precioInf", precioInf);
         model.addAttribute("precioSup", precioSup);
-        return "/consulta/listado";
+        return "/pruebas/listado2";
     }
 
     @PostMapping("/query2")
@@ -77,6 +77,16 @@ public class PruebasController {
         model.addAttribute("totalProductos", productos.size());
         model.addAttribute("precioInf", precioInf);
         model.addAttribute("precioSup", precioSup);
+        return "/pruebas/listado2";
+    }
+    
+    @PostMapping("/query4")
+    public String consultaQuery4(@RequestParam(value = "minExistencias") int minExistencias,
+            @RequestParam(value = "maxExistencias") int maxExistencias, Model model) {
+        var productos = productoService.findByExistenciasBetweenOrderByExistencias(minExistencias, maxExistencias);
+        model.addAttribute("productos", productos);
+        model.addAttribute("minExistencias", minExistencias);
+        model.addAttribute("maxExistencias", maxExistencias);
         return "/pruebas/listado2";
     }
 }

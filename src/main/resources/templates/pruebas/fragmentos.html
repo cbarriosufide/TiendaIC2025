@@ -6,7 +6,7 @@
     </head>
     <body>
         <!-- 1 Sección principal para mostrar la informaccion de las categorias -->
-        <section th:fragment="categoriasTabs" id="categorias">
+        <section th:fragment="categoriasTabs" id="categorias" sec:authorize="hasRole('ROLE_ADMIN')">
             <div class="row py-4">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -25,7 +25,7 @@
         </section>
 
         <!-- 2 Sección principal para mostrar la informaccion de las productos -->
-        <section th:fragment="listadoProductos" id="productos">
+        <section th:fragment="listadoProductos" id="productos" >
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
@@ -149,6 +149,32 @@
                             <div class="card-footer text-center">
                                 <button type="submit" class="btn btn-warning">
                                     <i class="fas fa-check"></i> [[#{pruebas.nativo}]]
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form method="POST" th:action="@{/pruebas/query4}" 
+                          class="was-validated">
+                        <div class="card">                            
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="minExistencias">[[#{pruebas.existencias.inferior}]]</label>
+                                    <input type="number" class="form-control" 
+                                           th:value="${minExistencias}"
+                                           th:name="minExistencias" required="true"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="maxExistencias">[[#{pruebas.existencias.superior}]]</label>
+                                    <input type="number" class="form-control" 
+                                           th:value="${maxExistencias}"
+                                           th:name="maxExistencias" required="true"/>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <button type="submit" class="btn btn-info">
+                                    <i class="fas fa-check"></i> [[#{pruebas.ampliadas}]]
                                 </button>
                             </div>
                         </div>
